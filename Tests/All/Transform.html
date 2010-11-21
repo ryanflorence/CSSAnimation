@@ -9,7 +9,6 @@
 	-webkit-perspective: 800;
 }
 #transformer {
-	-webkit-transition: -webkit-transform 500ms ease-out;
 	width: 50%;
 	height: 50%;
 	background: #ccc;
@@ -25,7 +24,15 @@
 <script src="/depender/build?require=Transform/Transform,Core/Element.Event"></script>
 
 <script>
-var transform = new Transform(document.getElementById('transformer'), 'WebkitTransform');
+var fixture = document.getElementById('transformer'),
+	transition = new Transition(fixture),
+	transform = new Transform(fixture);
+
+transition.set({
+	property: 'transform',
+	'timing-function': 'ease-out',
+	duration: '500ms'
+});
 
 makeActions([
 	{
@@ -42,22 +49,15 @@ makeActions([
 	},
 	{
 		fn: function(){
-			transform.rotate({x: 30, y: 30});
+			transform.rotate({x: 30, y: 30, z: 30});
 		},
-		title: "transform.rotate({x: 30, y: 30})"
+		title: "transform.rotate({x: 30, y: 30, z: 30})"
 	},
 	{
 		fn: function(){
-			transform.translate('z', -100);
+			transform.rotate('z', 0);
 		},
-		title: "transform.translate('z', -100)"
-	},
-	{
-		fn: function(){
-			transform.translate('Z', 0);
-		},
-		title: "transform.translate('Z', 0)",
-		description: 'The last action defined translateZ, this action should just replace it, leaving the others in tact.'
+		title: "transform.rotate('z', 0)"
 	},
 	{
 		fn: function(){
