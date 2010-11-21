@@ -1,0 +1,10 @@
+name: Transform
+
+author: Ryan Florence
+
+copyright: "&copy; [Ryan Florence](http://ryanflorence.com)"
+
+license: MIT-style license.
+
+sources:
+  - "Source/Transform.js"
