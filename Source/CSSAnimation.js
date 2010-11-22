@@ -40,6 +40,12 @@ var Transform = global.Transform = function(element, supported){
 		for (i in axis) if (axis.hasOwnProperty(i)) this.rotate(i, axis[i])
 		return this;
 	},
+	
+	skew: function(axis, value){
+		if (typeof axis === 'string') return this.add('skew' + axis.toUpperCase(), value);
+		for (i in axis) if (axis.hasOwnProperty(i)) this.skew(i, axis[i])
+		return this;
+	},
 
 	// not "public", feel free to use, but the rest of these methods
 	// are not guaranteed to have backward compatibility in future releases
@@ -53,32 +59,71 @@ var Transform = global.Transform = function(element, supported){
 		return this.set('');
 	},
 
-	regexes: {
-		'rotateX': /rotateX\((-?[0-9]+deg)\)/,
-		'rotateY': /rotateY\((-?[0-9]+deg)\)/,
-		'rotateZ': /rotateZ\((-?[0-9]+deg)\)/,
-		'rotate': /rotate\((-?[0-9]+deg)\)/,
-		'translateX': /translateX\((-?[0-9]+%)\)/,
-		'translateY': /translateY\((-?[0-9]+%)\)/,
-		'translateZ': /translateZ\((-?[0-9]+px)\)/
-	},
-
 	add: function(rule, value){
 		var transform = this.element.style[this.style],
 			rule = rule === 'rotateZ' ? 'rotate' : rule,
-			match = new RegExp(this.regexes[rule]).test(transform);
-			unit = new RegExp(/rotate/).test(rule)
-				? 'deg'
-				: rule === 'translateZ' 
-					? 'px' 
-					: '%',
+			match = new RegExp(this.rules[rule].regex).test(transform);
+			unit = this.rules[rule].unit,
 			shared = rule + '(' + value + unit + ')';
+
 		if (transform === 'none') transform = '';
 		return match
-			? this.set(transform.replace(this.regexes[rule], shared))
+			? this.set(transform.replace(this.rules[rule].regex, shared))
 			: this.set(transform + ' ' + shared);
-	}
+	},
 
+	// this is admittadly verbose, but if an API changes,
+	// this is easy to override and (sortof) future-proof the script
+	rules: {
+		'rotateX':{
+			regex: /rotateX\((-?[0-9]+deg)\)/,
+			unit: 'deg'
+		},
+		'rotateY': {
+			regex: /rotateY\((-?[0-9]+deg)\)/,
+			unit: 'deg'
+		},
+		'rotateZ': {
+			regex:  /rotateZ\((-?[0-9]+deg)\)/,
+			unit: 'deg'
+		},
+		'rotate': {
+			regex: /rotate\((-?[0-9]+deg)\)/,
+			unit: 'deg'
+		},
+		'translateX': {
+			regex:  /translateX\((-?[0-9]+%)\)/,
+			unit: '%'
+		},
+		'translateY': {
+			regex: /translateY\((-?[0-9]+%)\)/,
+			unit: '%'
+		},
+		'translateZ': {
+			regex: /translateZ\((-?[0-9]+px)\)/,
+			unit: 'px'
+		},
+		'scale': {
+			regex: /scale\((-?[0-9]+)\)/,
+			unit: ''
+		},
+		'scaleX': {
+			regex: /scaleX\((-?[0-9]+)\)/,
+			unit: ''
+		},
+		'scaleY': {
+			regex: /scaleY\((-?[0-9]+)\)/,
+			unit: ''
+		},
+		'skewX': {
+			regex:  /skewX\((-?[0-9]+deg)\)/,
+			unit: 'deg'
+		},
+		'skewX': {
+			regex:  /skewY\((-?[0-9]+deg)\)/,
+			unit: 'deg'
+		}
+	}
 };
 
 var Transition = global.Transition = function(element, supported){
