@@ -28,10 +28,28 @@ General Usage
 	    transition = new Transition(element),
 	    transform = new Transform(element);
 
-Transitions
-===========
+Transition
+==========
 
-Define a CSS Transition for an element.  Contains only two public methods
+Define a CSS Transition for an element.
+
+Transition method: constructor
+------------------------------
+
+Creates a new `Transition` object.
+
+**Signature**
+
+	new Transition(element);
+
+**Arguments**
+
+- element - A DOM element reference
+
+**Example**
+
+	var element = document.getElementById('some-el'),
+	    transition = new Transition(element);
 
 Transitions method: set
 -----------------------
@@ -112,6 +130,24 @@ Supports:
 - `skewX`, `skewY`
 
 The `matrix` and `skew(x [, y])` coming soon.
+
+Transform method: constructor
+------------------------------
+
+Creates a new `Transform` object.
+
+**Signature**
+
+	new Transform(element);
+
+**Arguments**
+
+- element - A DOM element reference
+
+**Example**
+
+	var element = document.getElementById('some-el'),
+	    transform = new Transform(element);
 
 Transform method: translate
 ---------------------------
