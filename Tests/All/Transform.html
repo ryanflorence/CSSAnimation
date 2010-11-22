@@ -61,9 +61,27 @@ makeActions([
 	},
 	{
 		fn: function(){
-			transform.skew({x: 30, y: 30});
+			transform.skew({x: 30, y: -30});
 		},
-		title: "transform.skew({x: 30, y: 30})"
+		title: "transform.skew({x: 30, y: -30})"
+	},
+	{
+		fn: function(){
+			transform.scale(1.2);
+		},
+		title: "transform.scale(1.2)"
+	},
+	{
+		fn: function(){
+			transform.scale({x: 0.5, y: 0.9});
+		},
+		title: "transform.scale({x: 0.5, y: 0.9})"
+	},
+	{
+		fn: function(){
+			transform.rotate(45);
+		},
+		title: "transform.rotate(45)"
 	},
 	{
 		fn: function(){

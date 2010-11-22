@@ -27,31 +27,22 @@ var Transform = global.Transform = function(element, supported){
 	this.style = getSupportedStyle(element, supported || [ 'WebkitTransform', 'MozTransform', 'OTransform', 'msTransform' ]);
 }; global.Transform.prototype = {
 
-	// usage: translate('x', 20)
 	translate: function(axis, value){
-		if (typeof axis === 'string') return this.add('translate' + axis.toUpperCase(), value);
-		for (i in axis) if (axis.hasOwnProperty(i)) this.translate(i, axis[i])
-		return this;
+		return this.setter(axis, value, 'translate');
 	},
 
-	// usage: rotate('z', 45)
 	rotate: function(axis, value){
-		if (typeof axis === 'string') return this.add('rotate' + axis.toUpperCase(), value);
-		for (i in axis) if (axis.hasOwnProperty(i)) this.rotate(i, axis[i])
-		return this;
+		if (typeof axis === 'number') return this.add('rotate', axis);
+		return this.setter(axis, value, 'rotate');
 	},
 	
 	skew: function(axis, value){
-		if (typeof axis === 'string') return this.add('skew' + axis.toUpperCase(), value);
-		for (i in axis) if (axis.hasOwnProperty(i)) this.skew(i, axis[i])
-		return this;
+		return this.setter(axis, value, 'skew');
 	},
 
-	// not "public", feel free to use, but the rest of these methods
-	// are not guaranteed to have backward compatibility in future releases
-
-	set: function(def){
-		this.element.style[this.style] = def;
+	scale: function(axis, value){
+		if (typeof axis === 'number') return this.add('scale', axis);
+		this.setter(axis, value, 'scale');
 		return this;
 	},
 
@@ -59,10 +50,24 @@ var Transform = global.Transform = function(element, supported){
 		return this.set('');
 	},
 
+	set: function(def){
+		this.element.style[this.style] = def;
+		return this;
+	},
+
+	// not "public", feel free to use, but the rest of these methods
+	// are not guaranteed to have backward compatibility in future releases
+
+	setter: function(a, b, method){
+		if (typeof a === 'string') return this.add(method + a.toUpperCase(), b);
+		for (i in a) if (a.hasOwnProperty(i)) this[method](i, a[i])
+		return this;
+	},
+
 	add: function(rule, value){
 		var transform = this.element.style[this.style],
 			rule = rule === 'rotateZ' ? 'rotate' : rule,
-			match = new RegExp(this.rules[rule].regex).test(transform);
+			match = new RegExp(this.rules[rule].regex).test(transform),
 			unit = this.rules[rule].unit,
 			shared = rule + '(' + value + unit + ')';
 
@@ -72,8 +77,14 @@ var Transform = global.Transform = function(element, supported){
 			: this.set(transform + ' ' + shared);
 	},
 
+	remove: function(rule){
+		return this.set(this.element.style[this.style].replace(this.rules[rule].regex, ''));
+	},
+
 	// this is admittadly verbose, but if an API changes,
 	// this is easy to override and (sortof) future-proof the script
+	// I'm still not sold it's the right way :\ ... but I'm more interested in
+	// creating something useful first, then clean it up :D
 	rules: {
 		'rotateX':{
 			regex: /rotateX\((-?[0-9]+deg)\)/,
@@ -119,9 +130,21 @@ var Transform = global.Transform = function(element, supported){
 			regex:  /skewX\((-?[0-9]+deg)\)/,
 			unit: 'deg'
 		},
-		'skewX': {
+		'skewY': {
 			regex:  /skewY\((-?[0-9]+deg)\)/,
 			unit: 'deg'
+		},
+		'scale': {
+			regex: /scale\((-?[0-9]+\.?[0-9]+?)\)/,
+			unit: ''
+		},
+		'scaleX': {
+			regex: /scaleX\((-?[0-9]+\.?[0-9]+?)\)/,
+			unit: ''
+		},
+		'scaleY': {
+			regex: /scaleY\((-?[0-9]+\.?[0-9]+?)\)/,
+			unit: ''
 		}
 	}
 };
@@ -150,6 +173,17 @@ var Transition = global.Transition = function(element, supported){
 		}
 		for (i in property) if (property.hasOwnProperty(i)) this.set(i, property[i]);
 		return this;
+	},
+
+	clear: function(rule){
+		if (!rule) {
+			return this.set({
+				duration: '',
+				property: '',
+				'timing-functin': ''
+			});
+		}
+		return this.set(rule, '');
 	}
 
 }
