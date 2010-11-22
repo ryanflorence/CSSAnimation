@@ -3,6 +3,13 @@ CSSAnimation
 
 CSS Animations with JavaScript.  This script includes two global constructors, `Transition` and `Transform`.  They automatically detect and work with the correct vendor property, ie `-webkit`, `-moz` etc.
 
+About this Repository
+---------------------
+
+- Tracking branch is `develop`
+- The master branch only contains tagged releases
+- I welcome contributors!
+
 Browser Support
 ---------------
 
