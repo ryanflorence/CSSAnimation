@@ -36,6 +36,8 @@ Define a CSS Transition for an element.  Contains only two public methods
 Transitions method: set
 -----------------------
 
+**Signature**
+
 	transition.set(rule, value);
 	transition.set({
 	  rule: value,
@@ -221,3 +223,8 @@ Skew an element's angles.
 **Notes**
 
 CSS transforms accept `skew(x, y)` and `skew(x)`, but this script does not.  It will support this syntax eventually.
+
+License
+=======
+
+MIT Style license.
