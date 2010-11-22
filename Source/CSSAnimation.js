@@ -180,7 +180,7 @@ var Transition = global.Transition = function(element, supported){
 			return this.set({
 				duration: '',
 				property: '',
-				'timing-functin': ''
+				'timing-function': ''
 			});
 		}
 		return this.set(rule, '');
