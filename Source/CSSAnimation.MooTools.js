@@ -58,12 +58,12 @@ Element.Properties.transition = {
 		this.get('transform').clear();
 		return this;
 	};
-	
+
 	obj.setTransition = function(){
 		var instance = this.get('transition');
 		instance.set.apply(instance, Array.slice(arguments, 0));
 	};
-	
+
 	Element.implement(obj);
 
 }());
