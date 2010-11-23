@@ -1,0 +1,63 @@
+<style>
+#container {
+	width: 400px;
+	height: 280px;
+	position: absolute;
+	left: 440px;
+	top: 40px;
+	text-align: center;
+	-webkit-perspective: 800;
+}
+#transformer {
+	width: 50%;
+	height: 50%;
+	background: #ccc;
+	line-height: 100px;
+	font-size: 25px;
+}
+</style>
+
+<div id=container>
+	<div id=transformer>Transform me!</div>
+</div>
+
+<script src="/depender/build?require=CSSAnimation/jQuery,Core/Element.Event"></script>
+
+<script>
+var fixture = $('#transformer'),
+	transform = new Transform(fixture[0]);
+
+fixture.transition({
+	property: 'transform',
+	'timing-function': 'ease-out',
+	duration: '500ms'
+});
+
+makeActions([
+	{
+		fn: function(){
+			transform.set('translateX(50%)');
+		},
+		title: "translateX",
+		description: 'Constructed with the property as transform, should move across the X axis.'
+	},
+	{
+		fn: function(){
+			fixture.transition('property', 'margin-top');
+			fixture[0].style.marginTop = '50px';
+		},
+		title: "setTransition('property', 'margin-top')",
+		description: 'Should change the transition property to margin-top and move down 50px'
+	},
+	{
+		fn: function(){
+			fixture.transition('property', 'background-color, color');
+			fixture[0].style.color = '#fff';
+			fixture[0].style.backgroundColor = '#000'
+		},
+		title: "set('property', 'background-color, color')",
+		description: 'Should support multiple properties'
+	}
+]);
+
+</script>
