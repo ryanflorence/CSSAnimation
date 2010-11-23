@@ -1,4 +1,4 @@
-name: Transform
+name: CSSAnimation
 
 author: Ryan Florence
 
@@ -8,3 +8,5 @@ license: MIT-style license.
 
 sources:
   - "Source/CSSAnimation.js"
+  - "Source/CSSAnimation.MooTools.js"
+  - "Source/CSSAnimation.jQuery.js"

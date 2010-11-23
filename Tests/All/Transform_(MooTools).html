@@ -1,0 +1,88 @@
+<style>
+#container {
+	width: 400px;
+	height: 280px;
+	position: absolute;
+	left: 440px;
+	top: 40px;
+	text-align: center;
+	-webkit-perspective: 800;
+}
+#transformer {
+	width: 50%;
+	height: 50%;
+	background: #ccc;
+	line-height: 100px;
+	font-size: 25px;
+}
+</style>
+
+<div id=container>
+	<div id=transformer>Transform me!</div>
+</div>
+
+<script src="/depender/build?require=CSSAnimation/MooTools,Core/Element.Event"></script>
+
+<script>
+var fixture = $('transformer'),
+	transition = new Transition(fixture);
+
+transition.set({
+	property: 'transform',
+	'timing-function': 'ease-out',
+	duration: '500ms'
+});
+
+makeActions([
+	{
+		fn: function(){
+			fixture.translate('y', 50);
+		},
+		title: "fixture.translate('y', 50)"
+	},
+	{
+		fn: function(){
+			fixture.rotate({x: 30, y: 30, z: 30});
+		},
+		title: "fixture.rotate({x: 30, y: 30, z: 30})"
+	},
+	{
+		fn: function(){
+			fixture.rotate('z', 0);
+		},
+		title: "fixture.rotate('z', 0)"
+	},
+	{
+		fn: function(){
+			fixture.skew({x: 30, y: -30});
+		},
+		title: "fixture.skew({x: 30, y: -30})"
+	},
+	{
+		fn: function(){
+			fixture.scale(1.2);
+		},
+		title: "fixture.scale(1.2)"
+	},
+	{
+		fn: function(){
+			fixture.scale({x: 0.5, y: 0.9});
+		},
+		title: "fixture.scale({x: 0.5, y: 0.9})"
+	},
+	{
+		fn: function(){
+			fixture.rotate(45);
+		},
+		title: "fixture.rotate(45)"
+	},
+	{
+		fn: function(){
+			fixture.clearTransform();
+		},
+		title: 'clearTransform'
+	}
+]);
+
+
+</script>
