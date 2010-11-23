@@ -27,7 +27,7 @@
 var fixture = $('#transformer'),
 	transform = new Transform(fixture[0]);
 
-fixture.transition({
+fixture.setTransition({
 	property: 'transform',
 	'timing-function': 'ease-out',
 	duration: '500ms'
@@ -43,7 +43,7 @@ makeActions([
 	},
 	{
 		fn: function(){
-			fixture.transition('property', 'margin-top');
+			fixture.setTransition('property', 'margin-top');
 			fixture[0].style.marginTop = '50px';
 		},
 		title: "setTransition('property', 'margin-top')",
@@ -51,7 +51,7 @@ makeActions([
 	},
 	{
 		fn: function(){
-			fixture.transition('property', 'background-color, color');
+			fixture.setTransition('property', 'background-color, color');
 			fixture[0].style.color = '#fff';
 			fixture[0].style.backgroundColor = '#000'
 		},

@@ -46,12 +46,14 @@ $.fn.clearTransform = function(){
 	});
 };
 
-$.fn.transition = function(){
-	var args = arguments;
-	return $(this).each(function(){
-		var instance = get.apply(this, ['transition', Transition]);
-		instance.set.apply(instance, Array.prototype.slice.call(args, 0));
-	});
-};
+$.each(['set', 'clear'], function(i, method){
+	$.fn[method + 'Transition'] = function(){
+		var args = arguments;
+		return $(this).each(function(){
+			var instance = get.apply(this, ['transition', Transition]);
+			instance[method].apply(instance, Array.prototype.slice.call(args, 0));
+		});
+	}
+});
 
 })(jQuery);

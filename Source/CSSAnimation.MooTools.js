@@ -59,10 +59,12 @@ Element.Properties.transition = {
 		return this;
 	};
 
-	obj.setTransition = function(){
-		var instance = this.get('transition');
-		instance.set.apply(instance, Array.slice(arguments, 0));
-	};
+	['set', 'clear'].each(function(method){
+		obj[method + 'Transition'] = function(){
+			var instance = this.get('transition');
+			instance[method].apply(instance, Array.slice(arguments, 0));
+		}
+	});
 
 	Element.implement(obj);
 
