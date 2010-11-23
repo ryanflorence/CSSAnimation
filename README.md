@@ -1,14 +1,41 @@
 CSSAnimation
 ============
 
-CSS Animations with JavaScript.  This script includes two global constructors, `Transition` and `Transform`.  They automatically detect and work with the correct vendor property, ie `-webkit`, `-moz` etc.
+CSS Transforms and Transitions with JavaScript.
 
-About this Repository
----------------------
+- CSSAnimation.js - Base, vanilla JavaScript implementation, no library required.
+- CSSAnimation.MooTools.js - MooTools API to the base constructors, requires CSSAnimation.js.
+- CSSAnimation.jQuery.js - jQuery API to the base constructors, requires CSSAnimation.js.
 
-- Tracking branch is `develop`
-- The master branch only contains tagged releases
-- I welcome contributors!
+Quick Examples
+--------------
+
+	// Vanilla JavaScript
+	var element = document.getElementById('some-el'),
+	    transition = new Transition(element),
+	    transform = new Transform(element),
+	
+	transition.set({
+	  property: 'transform',
+	  'timing-function': 'ease-in',
+	  duration: '2s'
+	});
+	
+	transform.rotate(720).scale(2);
+	
+	// MooTools
+	$('some-el').setTransition({
+	  property: 'transform',
+	  'timing-function': 'ease-in',
+	  duration: '2s'
+	}).rotate(720).scale(2);
+	
+	// jQuery
+	$('#some-el').setTransition({
+	  property: 'transform',
+	  'timing-function': 'ease-in',
+	  duration: '2s'
+	}).rotate(720).scale(2);
 
 Browser Support
 ---------------
@@ -21,12 +48,32 @@ Browser Support
 
 Insofar as the version supports transform and transition.
 
-General Usage
--------------
+About this Repository
+---------------------
+
+- Tracking branch is `develop`
+- Master branch contains only tagged releases
+- MooTools' Packager ready
+- Contributors welcome!
+
+License
+-------
+
+MIT Style license.
+
+---
+
+API Reference
+=============
+
+The following documentation first shows the base API, then MooTools, then jQuery.  All APIs take the same arguments.  Assume the following objects for the rest of the documentation:
 
 	var element = document.getElementById('some-el'),
 	    transition = new Transition(element),
-	    transform = new Transform(element);
+	    transform = new Transform(element),
+	
+	    mooElement = document.id('some-el'),
+	    jQueryCollection = jQuery('#some-el');
 
 Transition
 ==========
@@ -36,11 +83,12 @@ Define a CSS Transition for an element.
 Transition method: constructor
 ------------------------------
 
-Creates a new `Transition` object.
+Creates a new `Transition` object.  Constructed and cached automatically for MooTools and jQuery
 
 **Signature**
 
 	new Transition(element);
+	// constructed and cached automatically for MooTools and jQuery
 
 **Arguments**
 
@@ -61,6 +109,9 @@ Transitions method: set
 	  rule: value,
 	  rule2: value2
 	});
+	
+	mooElement.setTransition
+	jQueryCollection.setTransition
 
 **Arguments**
 
@@ -108,6 +159,9 @@ Clears all, or one transition rule.
 
 	transition.clear([rule]);
 
+	mooElement.clearTransition;
+	jQueryCollection.clearTransition;
+
 **Arguments**
 
 - rule (string) - Accepts the same values as `rule` in set.  If null, clears all rules.
@@ -116,6 +170,9 @@ Clears all, or one transition rule.
 
 	transition.clear('timing-function');
 	transition.clear(); // clears all rules
+	
+	mooElement.clearTransition('property');
+	jQueryCollection.clearTransition('duration');
 
 Transform
 =========
@@ -134,11 +191,12 @@ The `matrix` and `skew(x [, y])` coming soon.
 Transform method: constructor
 ------------------------------
 
-Creates a new `Transform` object.
+Creates a new `Transform` object. Constructed and cached automatically for MooTools and jQuery 
 
 **Signature**
 
 	new Transform(element);
+	// constructed and cached automatically for MooTools and jQuery
 
 **Arguments**
 
@@ -159,6 +217,9 @@ Transform method: translate
 		axis: value,
 		axis2: value2
 	});
+	
+	mooElement.translate
+	jQueryCollection.translate
 
 **Arguments**
 
@@ -172,6 +233,9 @@ Transform method: translate
 		x: 50,
 		y: 50
 	});
+	
+	mooElement.translate('x', 100);
+	jQueryCollection.translate('x', 100);
 
 Transform method: rotate
 ------------------------
@@ -186,6 +250,9 @@ Rotate an element around an axis.
 		axis: value,
 		axis2: value2
 	});
+	
+	mooElement.rotate;
+	jQueryCollection.rotate;
 
 **Arguments**
 
@@ -201,6 +268,9 @@ Rotate an element around an axis.
 		x: 30,
 		y: 30
 	});
+	
+	mooElement.rotate(-45);
+	jQueryCollection.rotate(-45);
 
 Transform method: scale
 -----------------------
@@ -215,6 +285,9 @@ Scale an element.
 		axis: value,
 		axis2: value2
 	});
+	
+	mooElement.scale;
+	jQueryCollection.scale;
 
 **Arguments**
 
@@ -229,6 +302,9 @@ Scale an element.
 		x: 0.5,
 		y: 1.5
 	});
+	
+	mooElement.scale(2);
+	jQueryCollection.scale(2);
 
 Transform method: skew
 ----------------------
@@ -242,6 +318,9 @@ Skew an element's angles.
 		axis: value,
 		axis2: value2
 	});
+	
+	mooElement.skew;
+	jQueryCollection.skew;
 
 **Arguments**
 
@@ -255,12 +334,11 @@ Skew an element's angles.
 		x: 30,
 		y: -10
 	});
+	
+	mooElement.skew('x', 30);
+	jQueryCollection.skew('x', 30);
 
 **Notes**
 
 CSS transforms accept `skew(x, y)` and `skew(x)`, but this script does not.  It will support this syntax eventually.
 
-License
-=======
-
-MIT Style license.
