@@ -18,22 +18,12 @@ provides: [jQuery]
 
 ;(function($){
 
-var getTransform = function(){
+var get = function(name, konstructor){
 	var $this = $(this),
-		instance = $this.data('transform');
+		instance = $this.data(name);
 	if (!instance) {
-		instance = new Transform(this);
-		$this.data('transform', instance);
-	}
-	return instance;
-},
-
-getTransition = function(){
-	var $this = $(this),
-		instance = $this.data('transition');
-	if (!instance) {
-		instance = new Transition(this);
-		$this.data('transition', instance);
+		instance = new konstructor(this);
+		$this.data(name, instance);
 	}
 	return instance;
 };
@@ -43,7 +33,7 @@ $.each(['translate', 'rotate', 'scale', 'skew'], function(i, method){
 	$.fn[method] = function(){
 		var args = arguments;
 		return $(this).each(function(){
-			var instance = getTransform.apply(this);
+			var instance = get.apply(this, ['transform', Transform]);
 			instance[method].apply(instance, Array.prototype.slice.call(args, 0));
 		});
 	}
@@ -52,14 +42,14 @@ $.each(['translate', 'rotate', 'scale', 'skew'], function(i, method){
 
 $.fn.clearTransform = function(){
 	return $(this).each(function(){
-		var instance = getTransform.apply(this).clear();
+		var instance = get.apply(this, ['transform', Transform]).clear();
 	});
 };
 
 $.fn.transition = function(){
 	var args = arguments;
 	return $(this).each(function(){
-		var instance = getTransition.apply(this);
+		var instance = get.apply(this, ['transition', Transition]);
 		instance.set.apply(instance, Array.prototype.slice.call(args, 0));
 	});
 };
