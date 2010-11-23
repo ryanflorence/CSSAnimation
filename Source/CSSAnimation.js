@@ -1,13 +1,13 @@
 /*
 ---
 
-name: Transform.js
+name: CSSAnimation
 
 license: MIT-style license.
 
 author: Ryan Florence <http://ryanflorence.com>
 
-provides: [Transform, Transition]
+provides: [CSSAnimation]
 
 ...
 */
