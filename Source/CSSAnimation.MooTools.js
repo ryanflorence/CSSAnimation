@@ -63,6 +63,7 @@ Element.Properties.transition = {
 		obj[method + 'Transition'] = function(){
 			var instance = this.get('transition');
 			instance[method].apply(instance, Array.slice(arguments, 0));
+			return this;
 		}
 	});
 
