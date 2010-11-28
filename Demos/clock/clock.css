@@ -1,0 +1,82 @@
+body {
+	background: #FFF056;
+}
+
+#clock {
+	background: #fff;
+	width: 400px;
+	height: 400px;
+	margin: auto;
+	margin-top: 55px;
+	font-size: 30px;
+	font-family: Times;
+	position: relative;
+	border: solid 20px;
+	-webkit-border-radius: 220px;
+	-moz-border-radius: 220px;
+	-ms-border-radius: 220px;
+	border-radius: 220px;
+	-webkit-box-shadow: 0px 5px 5px rgba(0,0,0,0.25);
+	-moz-box-shadow: 0px 5px 5px rgba(0,0,0,0.25);
+	-ms-box-shadow: 0px 5px 5px rgba(0,0,0,0.25);
+	box-shadow: 0px 5px 5px rgba(0,0,0,0.25);
+}
+
+b {
+	position: absolute;
+	top: 0;
+	left: 170px;
+	height: 400px;
+	width: 60px;
+	text-align: center;
+	font-weight: normal;
+}
+
+#seconds {
+	position: absolute;
+	top: 0;
+	left: 200px;
+	height: 400px;
+	width: 1px;	
+}
+
+#seconds i {
+	display: block;
+	height: 60%;
+	position: relative;
+	top: 1%;
+	background: red;
+}
+
+#minutes {
+	position: absolute;
+	top: 0;
+	left: 197px;
+	height: 400px;
+	width: 6px;	
+}
+
+#minutes i {
+	display: block;
+	height: 55%;
+	position: relative;
+	top: 2%;
+	background: black;
+}
+
+#hours {
+	position: absolute;
+	top: 0;
+	left: 195px;
+	height: 400px;
+	width: 10px;	
+}
+
+#hours i {
+	display: block;
+	height: 40%;
+	position: relative;
+	top: 13%;
+	background: black;
+}
+

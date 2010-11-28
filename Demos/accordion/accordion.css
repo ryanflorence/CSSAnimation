@@ -1,0 +1,52 @@
+* {
+	margin: 0;
+	padding: 0;
+	font-weight: normal;
+}
+
+body {
+	background: #454545;
+	margin: 1em;
+	font-family: helveticaneue, arial;
+}
+
+h1 {
+	margin: 1em 0;
+	color: #fff;
+}
+
+.group {
+	width: 300px;
+	float: left;
+	margin-right: 50px;
+}
+
+.accordion {
+	-webkit-box-shadow: 0 10px 30px rgba(0, 0, 0, 0.75);
+	-moz-box-shadow: 0 10px 30px rgba(0, 0, 0, 0.75);
+	-ms-box-shadow: 0 10px 30px rgba(0, 0, 0, 0.75);
+	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.75);
+}
+
+.accordion h2 + div {
+	overflow: hidden;
+	height: 0;
+	background: #fff;
+}
+
+.accordion h2 {
+	background: #afff00;
+	color: #9102d7;
+	border-bottom: 1px solid #98de00;
+	padding: 0.2em;
+}
+
+.accordion h2:hover {
+	background: #a5f100;
+	cursor: pointer;
+}
+
+p {
+	margin: 1em 0;
+	padding: 10px;
+}
