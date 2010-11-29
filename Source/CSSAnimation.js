@@ -46,6 +46,16 @@ var Transform = global.Transform = function(element, supported){
 		return this;
 	},
 
+	matrix: function(){
+		var transform = this.element.style[this.style],
+			match = new RegExp(this.rules.matrix.regex).test(transform),
+			shared = 'matrix(' + Array.prototype.slice.call(arguments, 0).join(',') + ')';
+		if (transform === 'none') transform = '';
+		return match
+			? this.set(transform.replace(this.rules[rule].regex, shared))
+			: this.set(transform + ' ' + shared);
+	},
+
 	clear: function(){
 		return this.set('');
 	},
@@ -70,7 +80,6 @@ var Transform = global.Transform = function(element, supported){
 			match = new RegExp(this.rules[rule].regex).test(transform),
 			unit = this.rules[rule].unit,
 			shared = rule + '(' + value + unit + ')';
-
 		if (transform === 'none') transform = '';
 		return match
 			? this.set(transform.replace(this.rules[rule].regex, shared))
@@ -144,6 +153,10 @@ var Transform = global.Transform = function(element, supported){
 		},
 		'scaleY': {
 			regex: /scaleY\((-?[0-9]+\.?[0-9]+?)\)/,
+			unit: ''
+		},
+		'matrix': {
+			regex: /matrix(.+)/,
 			unit: ''
 		}
 	}

@@ -184,9 +184,8 @@ Supports:
 - `translateX`, `translateY`, `translateZ`
 - `rotateX`, `rotateY`, `rotateZ`, `rotate`
 - `scale`, `scaleX`, `scaleY`
-- `skewX`, `skewY`
-
-The `matrix` and `skew(x [, y])` coming soon.
+- `skewX`, `skewY` (does not yet support just `skew(x, y)`)
+- `matrix`
 
 Transform method: constructor
 ------------------------------
@@ -342,3 +341,26 @@ Skew an element's angles.
 
 CSS transforms accept `skew(x, y)` and `skew(x)`, but this script does not.  It will support this syntax eventually.
 
+Transform method: matrix
+------------------------
+
+Specifies a 2D transformation matrix.
+
+**Signature**
+
+	transform.matrix(a, b, c, d, x, y);
+	mooElement.matrix;
+	jQueryCollection.matrix;
+
+**Arguments**
+
+Arguments combine to build the transform matrix. All arguments are numbers.
+
+	|a c| |x|
+	|b d| |y|
+
+**Examples**
+
+	transform.matrix(1, 0.1, 0.5, 1,  50, 50);
+	mooElement.matrix(1, 0.1, 0.5, 1,  50, 50);
+	jQueryCollection.matrix(1, 0.1, 0.5, 1,  50, 50);

@@ -28,7 +28,7 @@ var get = function(name, konstructor){
 	return instance;
 };
 
-$.each(['translate', 'rotate', 'scale', 'skew'], function(i, method){
+$.each(['translate', 'rotate', 'scale', 'skew', 'matrix'], function(i, method){
 
 	$.fn[method] = function(){
 		var args = arguments;

@@ -46,7 +46,7 @@ Element.Properties.transition = {
 
 	var obj = {};
 
-	['translate', 'rotate', 'scale', 'skew'].each(function(method){
+	['translate', 'rotate', 'scale', 'skew', 'matrix'].each(function(method){
 		obj[method] = function(){
 			var instance = this.get('transform');
 			instance[method].apply(instance, Array.slice(arguments, 0));
