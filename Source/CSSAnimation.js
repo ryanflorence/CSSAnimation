@@ -23,9 +23,16 @@ var getSupportedStyle = function(element, supported){
 };
 
 var Transform = global.Transform = function(element, supported){
+
 	this.element = element;
-	this.style = getSupportedStyle(element, supported || [ 'WebkitTransform', 'MozTransform', 'OTransform', 'msTransform' ]);
-}; global.Transform.prototype = {
+	this.style = getSupportedStyle(
+		element,
+		supported || ['WebkitTransform', 'MozTransform', 'OTransform', 'msTransform']
+	);
+
+};
+
+global.Transform.prototype = {
 
 	translate: function(axis, value){
 		return this.setter(axis, value, 'translate');
@@ -163,6 +170,7 @@ var Transform = global.Transform = function(element, supported){
 };
 
 var Transition = global.Transition = function(element, supported){
+
 	this.element = element;
 	this.supported = supported || {
 		prefixes:          ['WebkitTransition', 'MozTransition', 'OTransition', 'msTransition' ],
@@ -170,7 +178,10 @@ var Transition = global.Transition = function(element, supported){
 	};
 	this.style = getSupportedStyle(element, this.supported.prefixes);
 	this.supported.index = this.supported.prefixes.indexOf(this.style);
-}; global.Transition.prototype = {
+
+};
+
+global.Transition.prototype = {
 
 	map: {
 		'duration': 'Duration',
