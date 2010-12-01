@@ -128,18 +128,6 @@ global.Transform.prototype = {
 			regex: /translateZ\((-?[0-9]+px)\)/,
 			unit: 'px'
 		},
-		'scale': {
-			regex: /scale\((-?[0-9]+)\)/,
-			unit: ''
-		},
-		'scaleX': {
-			regex: /scaleX\((-?[0-9]+)\)/,
-			unit: ''
-		},
-		'scaleY': {
-			regex: /scaleY\((-?[0-9]+)\)/,
-			unit: ''
-		},
 		'skewX': {
 			regex:  /skewX\((-?[0-9]+deg)\)/,
 			unit: 'deg'
