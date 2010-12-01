@@ -16,9 +16,7 @@ provides: [CSSAnimation]
 
 var getSupportedStyle = function(element, supported){
 	for (var i = supported.length - 1; i >= 0; i--){
-		if (element.style[supported[i]] !== undefined){
-			return supported[i];
-		}
+		if (element.style[supported[i]] !== undefined) return supported[i];
 	};
 };
 
