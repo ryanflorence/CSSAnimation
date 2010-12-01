@@ -75,7 +75,7 @@ global.Transform.prototype = {
 
 	setter: function(a, b, method){
 		if (typeof a === 'string') return this.add(method + a.toUpperCase(), b);
-		for (i in a) if (a.hasOwnProperty(i)) this[method](i, a[i])
+		for (i in a) if (a.hasOwnProperty(i)) this[method](i, a[i]);
 		return this;
 	},
 
