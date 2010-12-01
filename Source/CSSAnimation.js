@@ -98,7 +98,7 @@ global.Transform.prototype = {
 	// this is admittadly verbose, but if an API changes,
 	// this is easy to override and (sortof) future-proof the script
 	// I'm still not sold it's the right way :\ ... but I'm more interested in
-	// creating something useful first, then clean it up :D
+	// creating something useful first, then cleaning it up :D
 	rules: {
 		'rotateX':{
 			regex: /rotateX\((-?[0-9]+deg)\)/,
